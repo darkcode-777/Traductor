@@ -1,0 +1,41 @@
+
+body, html {
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  text-align-last: center;
+}
+
+.container {
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background-color: none;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+  width: 600px;
+}
+
+.login-box h1 {
+  color: rgb(0, 0, 0);
+  font-family: Neuton;
+  font-size:50px;
+  margin: 50px;
+  text-align: center;
+}
+
+.volver {
+    background-color: rgb(53, 230, 68);
+     padding: 10px 80px;
+     border: 1px solid #000000;
+    border-radius: 20px;
+    margin:1px;
+    font-size: 20px;
+    text-decoration: none;
+}

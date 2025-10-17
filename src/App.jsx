@@ -1,43 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Conversor from './conversor'
+import { Routes, Route } from 'react-router-dom';
+import './App.css';
+import { useState, useEffect } from 'react';
+import Conversor from './conversor';
 
-function App() {
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [logueado, setLogueado] = useState(false);
 
-  const [usuario, setUsuario] = useState('')
-  const [clave, setClave] = useState('')
-  const [logueado, setLogueado] = useState(false)
-
-  function cambiarUsuario(evento) {
-    setUsuario(evento.target.value)
+  function cambiarEmail(evento) {
+    setEmail(evento.target.value);
   }
 
-  function cambiarClave(evento) {
-    setClave(evento.target.value)
+  function cambiarPassword(evento) {
+    setPassword(evento.target.value);
   }
 
-  function ingresar() {
-    if (usuario === 'admin' && clave === 'admin') {
-      alert('Bienvenido')
-      setLogueado(true)
+  async function ingresar(e) {
+    if (e && e.preventDefault) e.preventDefault();
+  const url = `http://localhost:3000/login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&usuario=${encodeURIComponent(email)}&clave=${encodeURIComponent(password)}`;
+  console.log('Enviando login a:', url);
+  const peticion = await fetch(url, { credentials: 'include' });
+    if (peticion.ok) {
+      setLogueado(true);
     } else {
-      alert('Usuario o clave incorrectos')
+      alert('Usuario o clave incorrectos');
     }
   }
 
+  useEffect(() => {
+    async function validar() {
+      const peticion = await fetch('http://localhost:3000/validar', { credentials: 'include' });
+      if (peticion.ok) {
+        setLogueado(true);
+      }
+    }
+    validar();
+  }, []);
+
+  function cerrarSesion() {
+    setLogueado(false);
+  }
+
   if (logueado) {
-    return <Conversor />;
+    return <Conversor onInicio={cerrarSesion} />;
   }
 
   return (
     <>
-      <h1>INICIO DE SESION</h1>
-      <input placeholder='Digita Usuario' type="text" name="usuario" id="usuario" value={usuario} onChange={cambiarUsuario} />
-      <input placeholder='Contraseña' type="password" name="clave" id="clave" value={clave} onChange={cambiarClave} />
-      <button onClick={ingresar}>Ingresar</button>
+      <div className="container">
+        <div className="login-box">
+          <h1>SENA ACCESS</h1>
+          <form id="loginForm" onSubmit={ingresar}>
+            <input type="text" name="email" placeholder="correo" required value={email} onChange={cambiarEmail} />
+            <input type="password" name="password" placeholder="contraseña" required value={password} onChange={cambiarPassword} />
+            <button type="submit" className="ingresar">Ingresar</button>
+          </form>
+          <br />
+          <a href="../RECUPERAR/recuperar contraseña.html" className="olvide">Olvidé mi contraseña</a>
+        </div>
+      </div>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+    </Routes>
   );
 }
 

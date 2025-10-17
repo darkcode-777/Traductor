@@ -1,0 +1,31 @@
+/* Reset y tipografías */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: linear-gradient(180deg,#f4fbf6 0%, #eaf7ef 100%); }
+
+/* Contenedor centrado */
+.container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+
+.login-box { width: 100%; max-width: 480px; background: #ffffff; border-radius: 14px; box-shadow: 0 10px 30px rgba(11,95,59,0.08); padding: 28px; }
+
+.login-box h1 { font-size: 26px; color: #063e2a; margin: 0 0 8px; }
+.parrafo { color: #3e6050; margin: 0 0 18px; font-size: 15px; }
+
+/* Inputs */
+input[type="email"], input[type="text"], input[type="password"] { width: 100%; padding: 12px 14px; border: 1px solid #dfe9e4; border-radius: 10px; font-size: 15px; margin-bottom: 14px; background: #fbfffc; }
+input:focus { outline: none; box-shadow: 0 0 0 4px rgba(11,95,59,0.06); border-color: #9fd3b6; }
+
+.botones { display:flex; gap:12px; align-items:center; }
+.buscar { background:#0b5f3b; color:#fff; padding:10px 16px; border-radius:10px; border:none; cursor:pointer; font-weight:600; }
+.buscar[disabled] { opacity:0.6; cursor:default; }
+.volver { background:transparent; color:#0b5f3b; padding:8px 12px; text-decoration:none; border-radius:8px; border:1px solid transparent; }
+
+/* Mensaje de alerta (oculto por defecto) */
+#mensaje { margin-top:14px; display:block; padding:10px 12px; border-radius:8px; font-weight:600; color:#0b5f3b; background: transparent; min-height: 0; transition: all .18s ease; }
+
+/* Estado error */
+.alert-error { background: #fff1f0; color: #9a1b0f; border: 1px solid #ffcdca; box-shadow: 0 4px 14px rgba(154,27,15,0.06); }
+
+/* Estado success */
+.alert-success { background: #eefcf4; color: #0b612f; border: 1px solid #cfeeda; box-shadow: 0 6px 18px rgba(11,95,59,0.06); }
+
+@media (max-width:420px) { .login-box { padding:18px; border-radius:10px; } .buscar{flex:1} }
